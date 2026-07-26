@@ -1,33 +1,44 @@
 # SiliconPulse AI
 
-Local-first **hardware intelligence** platform that turns GPU / accelerator telemetry into:
-
-- fleet observability  
-- digital-twin deviation  
-- anomaly + failure risk + RUL  
-- evidence-ranked root cause  
-- human-supervised agent actions  
-- incident reports  
+Local-first **hardware intelligence** platform that turns GPU / accelerator telemetry into fleet observability, digital-twin deviation, anomaly + failure risk + RUL, evidence-ranked root cause, human-supervised agent actions, and incident reports.
 
 Built to demonstrate product and systems thinking to hardware / semiconductor leaders — not to showcase Docker.
 
-## Live public demo (share this with the owner)
+---
 
-Always-on link (no terminal on anyone’s machine):
+## Working execution link (live demo)
 
-**https://sohamsa.github.io/siliconpulse-ai/**
+### [https://sohamsa.github.io/siliconpulse-ai/](https://sohamsa.github.io/siliconpulse-ai/)
 
-The simulation runs in the browser with real-time updates while the tab is open. Click **Run guided demo**.
+| | |
+| --- | --- |
+| **Status** | Live on GitHub Pages — always on |
+| **Needs terminal?** | No |
+| **Needs Docker / install?** | No |
+| **Updates** | Real-time while the browser tab is open |
+| **What to click** | **Run guided demo** |
 
-Source for that site: [`live/`](live/) (deployed via GitHub Pages).
+Share that URL with anyone. They open it in a browser and the full cooling-degradation story runs end to end:
 
-### Optional: local Python demo
+Reset → Inject GPU-042 cooling degradation → twin / anomaly / prediction → incident → RCA → maintenance approval → recovery → report.
+
+Demo source: [`live/`](live/)
+
+Repo: [github.com/SohamSa/siliconpulse-ai](https://github.com/SohamSa/siliconpulse-ai)
+
+---
+
+## Optional: local Python demo
+
+Only if you want to run on your machine (terminal must stay open):
 
 ```powershell
 python scripts/run_local_demo.py
 ```
 
-Open http://127.0.0.1:8787 — requires that terminal process to stay running.
+Then open http://127.0.0.1:8787
+
+---
 
 ## Why this is valuable
 
@@ -42,7 +53,7 @@ SiliconPulse answers with a working path:
 3. Agents propose remediation; humans approve high-impact actions  
 4. Full timeline + evidence-linked report  
 
-Read the pitch notes: [docs/product/EXECUTIVE_VALUE.md](docs/product/EXECUTIVE_VALUE.md)
+Pitch notes: [docs/product/EXECUTIVE_VALUE.md](docs/product/EXECUTIVE_VALUE.md)
 
 ## Business problems covered
 
@@ -52,16 +63,15 @@ Read the pitch notes: [docs/product/EXECUTIVE_VALUE.md](docs/product/EXECUTIVE_V
 4. Device-specific digital twins  
 5. Cross-domain sensor intelligence (healthcare **simulation** with hard disclaimers)
 
-## Architecture (local demo mode)
+## Architecture (browser live demo)
 
 ```text
-Simulator (50 GPUs)
-   → in-process telemetry events
+In-browser simulator (50 GPUs)
    → twin / anomaly / prediction / health
    → alerts + incident grouping
    → RCA agent + maintenance agent + approvals
    → report
-   → browser UI on :8787
+   → live UI (GitHub Pages)
 ```
 
 Optional fuller stack (Postgres, Redpanda, Compose) exists under `docker-compose.yml` for later — **not required** for the executive demo.
@@ -79,10 +89,10 @@ Optional fuller stack (Postgres, Redpanda, Compose) exists under `docker-compose
 
 | Path | Purpose |
 | --- | --- |
-| `apps/local_platform/` | Runnable no-Docker demo (start here) |
+| `live/` | Always-on public demo (GitHub Pages) |
+| `apps/local_platform/` | Optional local Python demo |
 | `docs/product/` | PRD, personas, executive value |
 | `docs/architecture/` | System context / data flow |
-| `services/telemetry-generator/` | Earlier Compose-oriented simulator package |
 | `docker-compose.yml` | Optional infra (network-dependent) |
 
 ## Docs
