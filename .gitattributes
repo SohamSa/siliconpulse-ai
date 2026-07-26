@@ -1,0 +1,4 @@
+# Ensure shell scripts keep LF endings for Linux containers on Windows checkouts
+*.sh text eol=lf
+*.bash text eol=lf
+infrastructure/**/*.sh text eol=lf

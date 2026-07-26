@@ -1,0 +1,18 @@
+﻿[project]
+name = "shared-events"
+version = "0.1.0"
+description = "SiliconPulse shared event envelopes and topic schemas"
+requires-python = ">=3.12"
+dependencies = [
+  "pydantic>=2.10,<3",
+  "shared-models",
+]
+
+[tool.uv.sources]
+shared-models = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+

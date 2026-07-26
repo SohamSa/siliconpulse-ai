@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SiliconPulse AI — Live Demo</title>
+    <meta
+      name="description"
+      content="Live hardware intelligence demo: digital twins, anomaly detection, root-cause agents, human approval."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <header class="top">
+      <div class="brand-block">
+        <p class="eyebrow">Hardware intelligence platform</p>
+        <h1>SiliconPulse AI</h1>
+        <div class="live-pill"><i></i> Live · always-on public demo</div>
+      </div>
+      <p class="tagline">
+        Raw accelerator telemetry to twin deviation, prediction, evidence-ranked root cause, and
+        human-approved action — no terminal, no Docker, no install.
+      </p>
+      <p class="host-note">
+        This page hosts the full simulation in your browser. Open the link anytime; metrics update in
+        real time while the tab is open.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <h2>Live fleet demo</h2>
+          <p>
+            50 simulated GPUs. Inject cooling degradation on <strong>GPU-042</strong> before a
+            static critical threshold would fire — then walk the full decision path.
+          </p>
+          <div class="cta-row">
+            <button id="btn-reset" class="btn ghost" type="button">Reset fleet</button>
+            <button id="btn-inject" class="btn primary" type="button">Inject cooling degradation</button>
+            <button id="btn-auto" class="btn accent" type="button">Run guided demo</button>
+          </div>
+          <p id="demo-status" class="status-line">Starting live telemetry…</p>
+        </div>
+        <div class="kpi-grid" id="kpi-grid"></div>
+      </section>
+
+      <section class="split">
+        <article class="panel">
+          <header class="panel-h">
+            <h3>Highest-risk devices</h3>
+            <span>Live-ranked</span>
+          </header>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Device</th>
+                  <th>Rack</th>
+                  <th>Temp</th>
+                  <th>Twin Δ</th>
+                  <th>Anomaly</th>
+                  <th>Fail P</th>
+                  <th>Health</th>
+                  <th>RUL h</th>
+                </tr>
+              </thead>
+              <tbody id="device-rows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <header class="panel-h">
+            <h3>Device detail</h3>
+            <span id="selected-device">GPU-042</span>
+          </header>
+          <div id="device-detail" class="detail"></div>
+        </article>
+      </section>
+
+      <section class="split">
+        <article class="panel">
+          <header class="panel-h">
+            <h3>Incidents & investigation</h3>
+            <span>Structured RCA — not LLM invention</span>
+          </header>
+          <div id="incidents" class="stack"></div>
+        </article>
+
+        <article class="panel">
+          <header class="panel-h">
+            <h3>Approvals & agents</h3>
+            <span>Human in the loop</span>
+          </header>
+          <div id="approvals" class="stack"></div>
+          <div id="agents" class="stack muted-top"></div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <header class="panel-h">
+          <h3>Incident report</h3>
+          <span>Evidence-linked outcome</span>
+        </header>
+        <pre id="report" class="report">No report yet. Complete investigate → approve → generate report.</pre>
+      </section>
+
+      <section class="panel">
+        <header class="panel-h">
+          <h3>Healthcare sensor demo (simulation only)</h3>
+        </header>
+        <p class="disclaimer">
+          This module is a simulated device-monitoring demonstration. It is not a medical diagnostic
+          system and must not be used for patient-care decisions.
+        </p>
+        <div class="hc-grid">
+          <div class="cardish">
+            <h4>HS-001 · healthy</h4>
+            <p>Signal quality 0.97 · battery 3.9V</p>
+            <p>Device health separated from simulated physiological channels.</p>
+          </div>
+          <div class="cardish">
+            <h4>HS-002 · degraded</h4>
+            <p>Drift + packet loss scenario — still not clinical.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel pitch">
+        <header class="panel-h">
+          <h3>Why this matters to a semiconductor / AI-systems leader</h3>
+        </header>
+        <ul>
+          <li>Statistical digital twins catch drift before static thresholds</li>
+          <li>Structured root-cause evidence — not LLM guesswork on raw sensors</li>
+          <li>Human-supervised agents for high-impact actions</li>
+          <li>Same architecture transferable beyond one device category</li>
+        </ul>
+        <p class="fineprint">
+          Synthetic telemetry. Demonstration-grade models. Statistical twins — not transistor-level
+          physics. Agent actions are simulated and human-supervised.
+        </p>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+[project]
+name = "siliconpulse-ai"
+version = "0.1.0"
+description = "Local-first hardware intelligence platform for GPU and sensor telemetry"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = { text = "Apache-2.0" }
+authors = [{ name = "SiliconPulse AI Contributors" }]
+dependencies = [
+  # Shared runtime (Phase 2+ services will pin versions more tightly)
+  "pydantic>=2.10,<3",
+  "pydantic-settings>=2.7,<3",
+  "sqlalchemy>=2.0,<3",
+  "alembic>=1.14,<2",
+  "psycopg[binary]>=3.2,<4",
+  "httpx>=0.28,<1",
+  "structlog>=24.4,<26",
+  "prometheus-client>=0.21,<1",
+  "opentelemetry-api>=1.29,<2",
+  "opentelemetry-sdk>=1.29,<2",
+  "python-dotenv>=1.0,<2",
+  "orjson>=3.10,<4",
+]
+
+[project.optional-dependencies]
+api = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.34,<1",
+  "python-jose[cryptography]>=3.3,<4",
+  "passlib[bcrypt]>=1.7,<2",
+  "sse-starlette>=2.2,<3",
+]
+streaming = [
+  "aiokafka>=0.12,<1",
+]
+ml = [
+  "pandas>=2.2,<3",
+  "numpy>=2.2,<3",
+  "scikit-learn>=1.6,<2",
+  "shap>=0.46,<1",
+  "mlflow>=2.19,<3",
+  "pyarrow>=18.0,<20",
+]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<1",
+  "pytest-cov>=6.0,<7",
+  "ruff>=0.9,<1",
+  "mypy>=1.14,<2",
+  "types-passlib",
+  "httpx>=0.28,<1",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<1",
+  "pytest-cov>=6.0,<7",
+  "ruff>=0.9,<1",
+  "mypy>=1.14,<2",
+  "types-passlib",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+  "packages/shared-models",
+  "packages/shared-events",
+  "packages/shared-db",
+  "packages/shared-observability",
+  "packages/shared-security",
+  "packages/shared-utils",
+  "apps/api",
+  "services/telemetry-generator",
+  "services/ingestion-service",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["apps", "services", "packages", "ml", "scripts", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = [
+  "shared_models",
+  "shared_events",
+  "shared_db",
+  "shared_observability",
+  "shared_security",
+  "shared_utils",
+]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+packages = []
+exclude = ["ml/notebooks/", ".venv/", "apps/web/"]
+
+[[tool.mypy.overrides]]
+module = ["shap.*", "mlflow.*", "aiokafka.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["packages", "apps", "services"]
+addopts = "-q --strict-markers"
+markers = [
+  "unit: fast unit tests",
+  "integration: requires docker services",
+  "e2e: end-to-end flows",
+]

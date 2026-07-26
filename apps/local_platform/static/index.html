@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SiliconPulse AI — Local Demo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <header class="top">
+      <div class="brand-block">
+        <p class="eyebrow">Hardware intelligence platform</p>
+        <h1>SiliconPulse AI</h1>
+      </div>
+      <p class="tagline">
+        Raw accelerator telemetry → twin deviation → prediction → evidence-ranked root cause →
+        human-approved action.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <h2>Live fleet demo</h2>
+          <p>
+            50 simulated GPUs. Inject cooling degradation on <strong>GPU-042</strong> before a
+            static critical threshold would fire — then walk the full decision path.
+          </p>
+          <div class="cta-row">
+            <button id="btn-reset" class="btn ghost">Reset fleet</button>
+            <button id="btn-inject" class="btn primary">Inject cooling degradation</button>
+            <button id="btn-auto" class="btn accent">Run guided demo</button>
+          </div>
+          <p id="demo-status" class="status-line">Waiting for baseline telemetry…</p>
+        </div>
+        <div class="kpi-grid" id="kpi-grid"></div>
+      </section>
+
+      <section class="split">
+        <article class="panel">
+          <header class="panel-h">
+            <h3>Highest-risk devices</h3>
+            <span>Sorted by anomaly / failure risk</span>
+          </header>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Device</th>
+                  <th>Rack</th>
+                  <th>Temp</th>
+                  <th>Twin Δ</th>
+                  <th>Anomaly</th>
+                  <th>Fail P</th>
+                  <th>Health</th>
+                  <th>RUL h</th>
+                </tr>
+              </thead>
+              <tbody id="device-rows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <header class="panel-h">
+            <h3>Device detail</h3>
+            <span id="selected-device">GPU-042</span>
+          </header>
+          <div id="device-detail" class="detail"></div>
+        </article>
+      </section>
+
+      <section class="split">
+        <article class="panel">
+          <header class="panel-h">
+            <h3>Incidents & investigation</h3>
+            <span>Structured RCA — not LLM invention</span>
+          </header>
+          <div id="incidents" class="stack"></div>
+        </article>
+
+        <article class="panel">
+          <header class="panel-h">
+            <h3>Approvals & agents</h3>
+            <span>Human in the loop for high-impact actions</span>
+          </header>
+          <div id="approvals" class="stack"></div>
+          <div id="agents" class="stack muted-top"></div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <header class="panel-h">
+          <h3>Incident report</h3>
+          <span>Evidence-linked outcome</span>
+        </header>
+        <pre id="report" class="report">No report yet. Complete investigate → approve → generate report.</pre>
+      </section>
+
+      <section class="panel warn-panel">
+        <header class="panel-h">
+          <h3>Healthcare sensor demo (simulation only)</h3>
+        </header>
+        <p class="disclaimer" id="hc-disclaimer"></p>
+        <div id="healthcare" class="hc-grid"></div>
+      </section>
+
+      <section class="panel pitch">
+        <header class="panel-h">
+          <h3>Why this matters to a semiconductor / AI-systems leader</h3>
+        </header>
+        <ul id="pitch-points"></ul>
+        <p class="fineprint">
+          Synthetic telemetry. Demonstration-grade models. Statistical twins — not transistor-level
+          physics. Agent actions are simulated and human-supervised.
+        </p>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

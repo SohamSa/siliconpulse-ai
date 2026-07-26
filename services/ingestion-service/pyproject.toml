@@ -1,0 +1,27 @@
+﻿[project]
+name = "ingestion-service"
+version = "0.1.0"
+description = "SiliconPulse telemetry validation and storage consumers"
+requires-python = ">=3.12"
+dependencies = [
+  "pydantic>=2.10,<3",
+  "pydantic-settings>=2.7,<3",
+  "shared-models",
+  "shared-events",
+  "shared-db",
+  "shared-observability",
+  "shared-utils",
+]
+
+[tool.uv.sources]
+shared-models = { workspace = true }
+shared-events = { workspace = true }
+shared-db = { workspace = true }
+shared-observability = { workspace = true }
+shared-utils = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+

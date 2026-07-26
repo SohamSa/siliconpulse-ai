@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --sp-canvas: #0b1220;
+  --sp-accent: #3d9cf0;
+}
+
+body {
+  margin: 0;
+  background: var(--sp-canvas);
+}
