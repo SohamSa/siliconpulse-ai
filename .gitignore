@@ -102,3 +102,6 @@ tmp/
 temp/
 *.tmp
 *.bak
+
+# Pushed separately if token has workflow scope
+.github/workflows/*.yml
