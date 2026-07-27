@@ -24,7 +24,7 @@ function render() {
     ["Avg temp °C", s.avg_temperature_c.toFixed(1)],
     ["Events", s.events_generated],
     ["Top risk", s.highest_risk_device],
-    ["Risk P", pct(s.highest_risk_prob)],
+    ["Top risk score", pct(s.highest_risk_prob)],
   ];
   document.getElementById("kpi-grid").innerHTML = items
     .map(
@@ -58,8 +58,8 @@ function render() {
     <div class="row"><span class="k">Temp / twin expected</span><span>${d.temperature_c.toFixed(1)}°C / ${d.twin_expected_temp.toFixed(1)}°C</span></div>
     <div class="row"><span class="k">Twin deviation</span><span>${d.twin_deviation.toFixed(2)} (conf ${d.twin_confidence})</span></div>
     <div class="row"><span class="k">Anomaly</span><span>${d.anomaly_score.toFixed(2)}</span></div>
-    <div class="row"><span class="k">Predicted failure</span><span>${d.failure_type} (${pct(d.failure_probability)})</span></div>
-    <div class="row"><span class="k">RUL / health</span><span>${d.rul_hours.toFixed(0)}h · ${d.health_score.toFixed(0)}</span></div>
+    <div class="row"><span class="k">Failure risk score</span><span>${d.failure_type} (${pct(d.failure_probability)})</span></div>
+    <div class="row"><span class="k">Demo RUL / health</span><span>${d.rul_hours.toFixed(0)}h · ${d.health_score.toFixed(0)}</span></div>
     <div class="row"><span class="k">Power / util / fan</span><span>${d.power_watts}W · ${d.utilization_pct}% · ${d.fan_rpm} RPM</span></div>
     <div class="row"><span class="k">True cooling efficiency</span><span>${d.cooling_eff} <em>(eval only)</em></span></div>`;
 
@@ -174,7 +174,7 @@ async function guidedDemo() {
       const hit = engine.overview().open_incidents.find((x) => x.affected_devices.includes("GPU-042"));
       if (d) {
         setStatus(
-          `GPU-042 twinΔ=${d.twin_deviation.toFixed(2)} anomaly=${d.anomaly_score.toFixed(2)} failP=${pct(d.failure_probability)}`,
+          `GPU-042 twinΔ=${d.twin_deviation.toFixed(2)} anomaly=${d.anomaly_score.toFixed(2)} risk=${pct(d.failure_probability)}`,
         );
       }
       if (hit) {

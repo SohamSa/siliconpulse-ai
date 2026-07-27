@@ -118,7 +118,8 @@ export class SiliconPulseEngine {
     this.baselines.clear();
     this.rng = mulberry32(this.seed);
     this._buildFleet();
-    for (let i = 0; i < 10; i++) this.tick();
+    // Warm device-specific residual baselines before alerts are eligible.
+    for (let i = 0; i < 35; i++) this.tick();
   }
 
   inject(scenario, deviceId = "GPU-042", severity = 0.85, rack = null) {
@@ -244,13 +245,17 @@ export class SiliconPulseEngine {
     const util = st.utilization / 100;
     let expected = 28 + 22 * util + 0.02 * st.power_w + (peerAvg - 55) * 0.15;
 
-    if (!this.baselines.has(st.device_id)) this.baselines.set(st.device_id, { temp: expected, n: 1 });
+    if (!this.baselines.has(st.device_id)) {
+      this.baselines.set(st.device_id, { residual: reportedTemp - expected, n: 1 });
+    }
     const baseline = this.baselines.get(st.device_id);
-    if (st.anomaly_score < 0.35 && st.cooling_eff > 0.9) {
-      baseline.temp = 0.95 * baseline.temp + 0.05 * expected;
+    if (baseline.n < 30 || (st.anomaly_score < 0.35 && st.cooling_eff > 0.9)) {
+      const observedResidual = reportedTemp - expected;
+      const alpha = baseline.n < 30 ? 0.3 : 0.02;
+      baseline.residual = (1 - alpha) * baseline.residual + alpha * observedResidual;
       baseline.n += 1;
     }
-    expected = 0.6 * expected + 0.4 * baseline.temp;
+    expected += baseline.residual;
     const deviation = Math.abs(reportedTemp - expected);
     st.twin_expected_temp = expected;
     st.twin_deviation = Math.min(1, deviation / 12 + deviation / Math.max(expected, 1) * 0.5);
@@ -312,6 +317,7 @@ export class SiliconPulseEngine {
 
   _alerts(st, reportedTemp) {
     const now = Date.now();
+    if ((this.baselines.get(st.device_id)?.n || 0) < 20) return;
     if (st.twin_deviation < 0.35 || reportedTemp >= 95) return;
     const key = `${st.device_id}:twin_temperature_deviation`;
     if ((this.dedupeUntil.get(key) || 0) > now) return;

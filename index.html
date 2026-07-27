@@ -61,7 +61,7 @@
                   <th>Temp</th>
                   <th>Twin Δ</th>
                   <th>Anomaly</th>
-                  <th>Fail P</th>
+                  <th>Risk</th>
                   <th>Health</th>
                   <th>RUL h</th>
                 </tr>
@@ -78,6 +78,26 @@
           </header>
           <div id="device-detail" class="detail"></div>
         </article>
+      </section>
+
+      <section class="panel">
+        <header class="panel-h">
+          <h3>Reproducible model benchmark</h3>
+          <span>Held-out synthetic seeds · committed artifact</span>
+        </header>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="label">Test precision</div><div class="value">100.0%</div></div>
+          <div class="kpi"><div class="label">Test recall</div><div class="value">96.6%</div></div>
+          <div class="kpi"><div class="label">Test F1</div><div class="value">98.3%</div></div>
+          <div class="kpi"><div class="label">False-positive rate</div><div class="value">0.0%</div></div>
+          <div class="kpi"><div class="label">Held-out rows</div><div class="value">1,800</div></div>
+          <div class="kpi"><div class="label">Mean lead</div><div class="value">59.8 steps</div></div>
+        </div>
+        <p class="fineprint">
+          Logistic regression trained with gradient descent on seeds 10–29 and tested on unseen seeds
+          101–110. These results validate the reproducible synthetic pipeline only; they do not establish
+          production GPU failure performance. Re-run with <code>python ml/train_demo_models.py</code>.
+        </p>
       </section>
 
       <section class="split">
@@ -133,14 +153,15 @@
           <h3>Why this matters to a semiconductor / AI-systems leader</h3>
         </header>
         <ul>
-          <li>Statistical digital twins catch drift before static thresholds</li>
+          <li>Statistical operational twins can flag drift before an 85°C static threshold</li>
           <li>Structured root-cause evidence — not LLM guesswork on raw sensors</li>
           <li>Human-supervised agents for high-impact actions</li>
           <li>Same architecture transferable beyond one device category</li>
         </ul>
         <p class="fineprint">
-          Synthetic telemetry. Demonstration-grade models. Statistical twins — not transistor-level
-          physics. Agent actions are simulated and human-supervised.
+          Synthetic telemetry. One trained cooling classifier plus deterministic risk scoring.
+          Statistical operational twins — not transistor-level physics. Agent workflows are simulated
+          and human-supervised.
         </p>
       </section>
     </main>
