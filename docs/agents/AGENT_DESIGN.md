@@ -1,5 +1,9 @@
 # SiliconPulse AI — Agent Design
 
+> **Current maturity:** the browser and local demos implement deterministic, auditable workflow
+> prototypes for RCA, maintenance approval, and reporting. They are not LLM-powered autonomous
+> agents. The catalog below is the production design contract.
+
 ## Design rules
 
 - Specialized agents with **limited responsibilities** — no unrestricted super-agent

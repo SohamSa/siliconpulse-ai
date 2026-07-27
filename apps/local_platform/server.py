@@ -252,6 +252,10 @@ def route_post_inject(h: BaseHTTPRequestHandler, _p: dict[str, str], body: dict[
 
 def route_post_reset(h: BaseHTTPRequestHandler, _p: dict[str, str], _b: dict[str, Any]) -> None:
     SIM.reset_fleet()
+    INTEL.history.clear()
+    INTEL.peer_temp.clear()
+    INTEL.baselines.clear()
+    INTEL._dedupe_until.clear()
     INTEL.alerts.clear()
     INTEL.incidents.clear()
     INTEL.reports.clear()

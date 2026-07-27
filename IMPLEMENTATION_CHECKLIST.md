@@ -154,14 +154,19 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` deferred
 
 ## Primary demo path checklist
 
-- [ ] Start ≥50 GPU fleet healthy
-- [ ] Inject cooling degradation on GPU-042
-- [ ] Twin deviation before critical threshold
-- [ ] Anomaly + prediction + RUL drop
-- [ ] Alert + incident
-- [ ] Root-cause agent → device-level cooling
-- [ ] Maintenance agent → approval → simulated action
-- [ ] Stabilization + resolve + report + timeline
+- [x] Start ≥50 GPU fleet healthy — browser and local prototype
+- [x] Inject cooling degradation on GPU-042 — browser and local prototype
+- [x] Twin deviation before critical threshold — statistical operational twin
+- [x] Trained cooling detector on held-out synthetic seeds
+- [x] Deterministic anomaly/risk/demo-RUL movement
+- [x] Alert + incident — in-memory prototype
+- [x] Root-cause workflow → device-level cooling
+- [x] Maintenance workflow → approval → simulated action
+- [x] Stabilization + report + timeline
+
+> Phase checkboxes above refer to the production-grade distributed implementation. The primary
+> demo checklist refers to simplified, working browser/local prototypes. See
+> `docs/product/PRESENTATION_READINESS.md` for the exact boundary.
 
 ---
 

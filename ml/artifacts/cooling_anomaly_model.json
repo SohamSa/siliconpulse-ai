@@ -1,0 +1,65 @@
+{
+  "model_name": "synthetic-cooling-logistic-v1",
+  "model_type": "logistic_regression_gradient_descent",
+  "features": [
+    "temperature_c",
+    "power_watts",
+    "utilization_pct",
+    "fan_efficiency_proxy",
+    "peer_temperature_delta",
+    "temperature_rate"
+  ],
+  "training_seeds": "10-29",
+  "test_seeds": "101-110",
+  "train_rows": 3600,
+  "test_rows": 1800,
+  "normalization": {
+    "mean": [
+      52.0862387601787,
+      333.5087630043686,
+      57.98667821799198,
+      0.8844444444444445,
+      -5.5554792233608055,
+      0.028322101955449628
+    ],
+    "scale": [
+      4.826568844471292,
+      33.884460267338106,
+      7.929565335872817,
+      0.18157638692109065,
+      4.876039909761942,
+      0.398254704182514
+    ]
+  },
+  "intercept": 0.7229663555858408,
+  "coefficients": [
+    1.4424856138111215,
+    -0.7150756573423116,
+    -0.7484787863773279,
+    -2.8575485547684387,
+    1.4000668560120302,
+    2.0014519013290117
+  ],
+  "decision_threshold": 0.5,
+  "test_metrics": {
+    "precision": 1.0,
+    "recall": 0.9656,
+    "f1": 0.9825,
+    "false_positive_rate": 0.0,
+    "tp": 589,
+    "fp": 0,
+    "tn": 1190,
+    "fn": 21
+  },
+  "detection_lead_steps": {
+    "mean": 59.8,
+    "minimum": 58,
+    "maximum": 61,
+    "note": "Compared with an 85C static threshold; 90 means threshold did not fire in the window."
+  },
+  "limitations": [
+    "Trained and tested only on synthetic telemetry.",
+    "Metrics demonstrate pipeline correctness, not production GPU reliability.",
+    "One simulation step represents one demo sampling interval, not a validated wall-clock duration."
+  ]
+}

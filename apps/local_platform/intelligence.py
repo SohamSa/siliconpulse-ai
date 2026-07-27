@@ -89,16 +89,18 @@ class IntelligenceEngine:
         expected = 28.0 + 22.0 * util + 0.02 * evt["power_watts"] + (peer_avg - 55.0) * 0.15
         # Warm baseline after a few samples
         key = st.device_id
+        actual = evt["temperature_c"]
         if key not in self.baselines:
-            self.baselines[key] = {"temp": expected, "n": 1.0}
+            self.baselines[key] = {"residual": actual - expected, "n": 1.0}
         baseline = self.baselines[key]
         # Only learn baseline while healthy / low anomaly
-        if st.anomaly_score < 0.35 and st.cooling_eff > 0.9:
-            baseline["temp"] = 0.95 * baseline["temp"] + 0.05 * expected
+        if baseline["n"] < 30 or (st.anomaly_score < 0.35 and st.cooling_eff > 0.9):
+            observed_residual = actual - expected
+            alpha = 0.3 if baseline["n"] < 30 else 0.02
+            baseline["residual"] = (1 - alpha) * baseline["residual"] + alpha * observed_residual
             baseline["n"] += 1
-        expected = 0.6 * expected + 0.4 * baseline["temp"]
+        expected += baseline["residual"]
 
-        actual = evt["temperature_c"]
         deviation = abs(actual - expected)
         pct = deviation / max(expected, 1.0)
         st.twin_expected_temp = expected
@@ -186,6 +188,9 @@ class IntelligenceEngine:
         now = time.time()
         candidates: list[tuple[str, str, float, float, list[str], str]] = []
 
+        if self.baselines.get(st.device_id, {}).get("n", 0) < 20:
+            return
+
         if st.twin_deviation >= 0.35 and evt["temperature_c"] < 95:
             candidates.append(
                 (
@@ -201,13 +206,13 @@ class IntelligenceEngine:
                     "Inspect cooling path and compare with rack peers before critical threshold breach.",
                 )
             )
-        if evt["temperature_c"] >= 85:
+        if evt["temperature_c"] >= 95:
             candidates.append(
                 (
                     "high_temperature",
-                    "critical" if evt["temperature_c"] >= 95 else "warning",
+                    "critical" if evt["temperature_c"] >= 100 else "warning",
                     evt["temperature_c"],
-                    80.0,
+                    95.0,
                     [f"Temperature {evt['temperature_c']:.1f}°C"],
                     "Reduce workload and inspect cooling.",
                 )

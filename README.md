@@ -4,6 +4,10 @@ Local-first **hardware intelligence** platform that turns GPU / accelerator tele
 
 Built to demonstrate product and systems thinking to hardware / semiconductor leaders — not to showcase Docker.
 
+**Technical maturity:** executive prototype with one reproducibly trained synthetic cooling
+classifier, a statistical operational twin, deterministic risk/RCA logic, and auditable
+human-gated agent workflows. It is not validated on production semiconductor telemetry.
+
 ---
 
 ## Working execution link (live demo)
@@ -79,11 +83,25 @@ Optional fuller stack (Postgres, Redpanda, Compose) exists under `docker-compose
 ## Honest limitations
 
 - Telemetry is **synthetic**  
-- Models are **demonstration-grade**  
+- One cooling classifier is trained and tested on held-out synthetic seeds; other risk/RUL
+  outputs remain **demonstration-grade deterministic scores**
 - Twin is **statistical**, not transistor-level  
 - Healthcare module is **not medical / not diagnostic**  
 - Agent actions are **simulated** and **human-supervised**  
 - Not validated on real semiconductor production fleets  
+
+## Reproducible model evidence
+
+```bash
+python ml/train_demo_models.py
+python -m unittest tests.unit.test_demo_model -v
+```
+
+The committed v1 model uses non-overlapping training and test seeds. Held-out synthetic results:
+precision 1.000, recall 0.966, F1 0.983, and false-positive rate 0.000 across 1,800 test rows.
+These numbers validate the synthetic pipeline only and must not be presented as real-fleet
+performance. See [model card](docs/ai/MODEL_CARD_COOLING_V1.md) and
+[presentation readiness](docs/product/PRESENTATION_READINESS.md).
 
 ## Project layout (high signal)
 
@@ -101,7 +119,9 @@ Optional fuller stack (Postgres, Redpanda, Compose) exists under `docker-compose
 - [Product requirements](docs/product/PRODUCT_REQUIREMENTS.md)  
 - [Business problems](docs/product/BUSINESS_PROBLEMS.md)  
 - [AI strategy](docs/ai/AI_STRATEGY.md)  
+- [Cooling model card](docs/ai/MODEL_CARD_COOLING_V1.md)
 - [Agent design](docs/agents/AGENT_DESIGN.md)  
+- [Presentation readiness](docs/product/PRESENTATION_READINESS.md)
 - [Local setup](docs/operations/LOCAL_SETUP.md)  
 
 ## License

@@ -1,0 +1,20 @@
+{
+  "model": "synthetic-cooling-logistic-v1",
+  "test_metrics": {
+    "precision": 1.0,
+    "recall": 0.9656,
+    "f1": 0.9825,
+    "false_positive_rate": 0.0,
+    "tp": 589,
+    "fp": 0,
+    "tn": 1190,
+    "fn": 21
+  },
+  "detection_lead_steps": {
+    "mean": 59.8,
+    "minimum": 58,
+    "maximum": 61,
+    "note": "Compared with an 85C static threshold; 90 means threshold did not fire in the window."
+  },
+  "data_boundary": "unseen random seeds; synthetic telemetry only"
+}
