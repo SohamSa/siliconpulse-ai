@@ -2,6 +2,8 @@
 
 Local-first **hardware intelligence** platform that turns GPU / accelerator telemetry into fleet observability, digital-twin deviation, anomaly + failure risk + RUL, evidence-ranked root cause, human-supervised agent actions, and incident reports.
 
+The current prototype also includes three auditable semiconductor-AI extensions: a discrete-time survival/RUL benchmark, synthetic wafer spatial/yield triage, and an evidence-grounded engineering copilot with explicit approval gates.
+
 Built to demonstrate product and systems thinking to hardware / semiconductor leaders — not to showcase Docker.
 
 **Technical maturity:** executive prototype with one reproducibly trained synthetic cooling
@@ -94,6 +96,8 @@ Optional fuller stack (Postgres, Redpanda, Compose) exists under `docker-compose
 
 ```bash
 python ml/train_demo_models.py
+python ml/train_survival_model.py
+python ml/wafer_yield_intelligence.py
 python -m unittest tests.unit.test_demo_model -v
 ```
 
@@ -102,6 +106,14 @@ precision 1.000, recall 0.966, F1 0.983, and false-positive rate 0.000 across 1,
 These numbers validate the synthetic pipeline only and must not be presented as real-fleet
 performance. See [model card](docs/ai/MODEL_CARD_COOLING_V1.md) and
 [presentation readiness](docs/product/PRESENTATION_READINESS.md).
+
+Additional committed evidence:
+
+- `ml/artifacts/silicon_survival_model.json`: device-separated discrete-time survival evaluation, dynamic concordance, interval Brier score, and calibration bins.
+- `ml/artifacts/wafer_yield_intelligence.json`: generated wafer-pattern evaluation and example engineering dispositions.
+- `apps/local_platform/engineering_copilot.py`: retrieved evidence IDs, ranked hypotheses, missing evidence, governed tool registry, and human approval audit.
+
+These additions remain synthetic method demonstrations. They are designed to make the route to real monitor, test, fab, and in-field data explicit—not to imply production semiconductor validation.
 
 ## Project layout (high signal)
 
@@ -120,7 +132,10 @@ performance. See [model card](docs/ai/MODEL_CARD_COOLING_V1.md) and
 - [Business problems](docs/product/BUSINESS_PROBLEMS.md)  
 - [AI strategy](docs/ai/AI_STRATEGY.md)  
 - [Cooling model card](docs/ai/MODEL_CARD_COOLING_V1.md)
+- [Survival / RUL model card](docs/ai/SURVIVAL_RUL_MODEL_CARD.md)
+- [Wafer yield intelligence](docs/ai/WAFER_YIELD_INTELLIGENCE.md)
 - [Agent design](docs/agents/AGENT_DESIGN.md)  
+- [Engineering copilot](docs/agents/ENGINEERING_COPILOT.md)
 - [Presentation readiness](docs/product/PRESENTATION_READINESS.md)
 - [Local setup](docs/operations/LOCAL_SETUP.md)  
 

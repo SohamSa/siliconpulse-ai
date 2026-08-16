@@ -1,0 +1,175 @@
+{
+  "model_name": "synthetic-wafer-spatial-triage-v1",
+  "patterns": [
+    "normal",
+    "edge_ring",
+    "center_cluster",
+    "scratch"
+  ],
+  "evaluation": {
+    "accuracy": 0.9469,
+    "test_wafers": 320,
+    "confusion_matrix": {
+      "normal": {
+        "normal": 63,
+        "edge_ring": 13,
+        "center_cluster": 0,
+        "scratch": 4
+      },
+      "edge_ring": {
+        "normal": 0,
+        "edge_ring": 80,
+        "center_cluster": 0,
+        "scratch": 0
+      },
+      "center_cluster": {
+        "normal": 0,
+        "edge_ring": 0,
+        "center_cluster": 80,
+        "scratch": 0
+      },
+      "scratch": {
+        "normal": 0,
+        "edge_ring": 0,
+        "center_cluster": 0,
+        "scratch": 80
+      }
+    },
+    "data_boundary": "generated wafer maps; pattern families match the generator"
+  },
+  "examples": [
+    {
+      "wafer_id": "WAFER-0901",
+      "predicted_pattern": "normal",
+      "confidence": 0.7198,
+      "yield_pct": 98.22,
+      "features": {
+        "defect_rate": 0.0178,
+        "edge_concentration": 0.25,
+        "center_concentration": 0.0,
+        "linear_concentration": 0.0
+      },
+      "ranked_patterns": [
+        {
+          "pattern": "normal",
+          "score": 0.8756
+        },
+        {
+          "pattern": "edge_ring",
+          "score": 0.3053
+        },
+        {
+          "pattern": "center_cluster",
+          "score": 0.0178
+        },
+        {
+          "pattern": "scratch",
+          "score": 0.0178
+        }
+      ],
+      "recommended_next_step": "No dominant spatial signature; continue routine sampling.",
+      "boundary": "Spatial signature is evidence for triage, not proof of physical root cause."
+    },
+    {
+      "wafer_id": "WAFER-0902",
+      "predicted_pattern": "edge_ring",
+      "confidence": 0.6839,
+      "yield_pct": 74.22,
+      "features": {
+        "defect_rate": 0.2578,
+        "edge_concentration": 0.9655,
+        "center_concentration": 0.0172,
+        "linear_concentration": 0.069
+      },
+      "ranked_patterns": [
+        {
+          "pattern": "edge_ring",
+          "score": 1.3681
+        },
+        {
+          "pattern": "scratch",
+          "score": 0.344
+        },
+        {
+          "pattern": "center_cluster",
+          "score": 0.2785
+        },
+        {
+          "pattern": "normal",
+          "score": 0.0
+        }
+      ],
+      "recommended_next_step": "Edge-concentrated signature; inspect edge process and handling history.",
+      "boundary": "Spatial signature is evidence for triage, not proof of physical root cause."
+    },
+    {
+      "wafer_id": "WAFER-0903",
+      "predicted_pattern": "center_cluster",
+      "confidence": 0.5119,
+      "yield_pct": 91.56,
+      "features": {
+        "defect_rate": 0.0844,
+        "edge_concentration": 0.0526,
+        "center_concentration": 0.9474,
+        "linear_concentration": 0.4211
+      },
+      "ranked_patterns": [
+        {
+          "pattern": "center_cluster",
+          "score": 1.2213
+        },
+        {
+          "pattern": "scratch",
+          "score": 0.6108
+        },
+        {
+          "pattern": "normal",
+          "score": 0.4089
+        },
+        {
+          "pattern": "edge_ring",
+          "score": 0.145
+        }
+      ],
+      "recommended_next_step": "Center-localized signature; inspect center-zone process conditions.",
+      "boundary": "Spatial signature is evidence for triage, not proof of physical root cause."
+    },
+    {
+      "wafer_id": "WAFER-0904",
+      "predicted_pattern": "scratch",
+      "confidence": 0.4891,
+      "yield_pct": 91.56,
+      "features": {
+        "defect_rate": 0.0844,
+        "edge_concentration": 0.3158,
+        "center_concentration": 0.2632,
+        "linear_concentration": 0.8947
+      },
+      "ranked_patterns": [
+        {
+          "pattern": "scratch",
+          "score": 1.2029
+        },
+        {
+          "pattern": "edge_ring",
+          "score": 0.4476
+        },
+        {
+          "pattern": "normal",
+          "score": 0.4089
+        },
+        {
+          "pattern": "center_cluster",
+          "score": 0.4002
+        }
+      ],
+      "recommended_next_step": "Linear signature; inspect handling, transport, and contact events.",
+      "boundary": "Spatial signature is evidence for triage, not proof of physical root cause."
+    }
+  ],
+  "limitations": [
+    "Synthetic wafer maps only.",
+    "Rule-based spatial baseline, not a vision foundation model.",
+    "Process engineers must validate any physical-cause hypothesis."
+  ]
+}
