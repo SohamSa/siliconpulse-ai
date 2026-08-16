@@ -322,6 +322,7 @@ The larger Docker, Postgres, Redpanda, Prometheus, Grafana, and service scaffold
 - [Wafer yield intelligence](docs/ai/WAFER_YIELD_INTELLIGENCE.md)
 - [Agent design](docs/agents/AGENT_DESIGN.md)
 - [Engineering copilot](docs/agents/ENGINEERING_COPILOT.md)
+- [Complete data field catalog](docs/data/DATA_FIELD_CATALOG.md)
 - [Architecture](ARCHITECTURE.md)
 - [Presentation readiness](docs/product/PRESENTATION_READINESS.md)
 
