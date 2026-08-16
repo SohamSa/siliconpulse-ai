@@ -212,7 +212,17 @@ tbody tr:hover, tbody tr.active { background: rgba(47, 158, 139, 0.08); }
   color: var(--muted);
   font-size: 0.85rem;
 }
+.lab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+.module-label { color: var(--accent-2) !important; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem !important; }
+.lab-output { margin-top: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; color: var(--muted); }
+.lab-output h4 { color: var(--ink); margin: 0 0 0.7rem; }
+.lab-output pre { max-height: 360px; overflow: auto; white-space: pre-wrap; color: #d5e2ec; font: 0.78rem/1.45 var(--font-mono); }
+.wafer-map { float: right; display: grid; grid-template-columns: repeat(15, 7px); grid-template-rows: repeat(15, 7px); gap: 2px; margin: 0 0 1rem 1rem; }
+.wafer-map i { width: 7px; height: 7px; border-radius: 1px; }
+.wafer-map .pass { background: rgba(95, 191, 138, 0.55); }
+.wafer-map .fail { background: var(--danger); }
 @media (max-width: 960px) {
   .hero-panel, .split { grid-template-columns: 1fr; }
+  .lab-grid { grid-template-columns: 1fr; }
   .top, .layout { padding-left: 1rem; padding-right: 1rem; }
 }
