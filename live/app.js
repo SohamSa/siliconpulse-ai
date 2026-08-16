@@ -1,4 +1,5 @@
 import { SiliconPulseEngine } from "./engine.js";
+import { copilotAssessment, lifecycleAssessment, waferAssessment } from "./semiconductor_ai.js";
 
 const engine = new SiliconPulseEngine({ deviceCount: 50, rackCount: 5, seed: 42 });
 engine.reset();
@@ -228,6 +229,30 @@ document.getElementById("btn-inject").onclick = () => {
 };
 
 document.getElementById("btn-auto").onclick = () => guidedDemo();
+
+function showLab(title, data, extra = "") {
+  document.getElementById("ai-lab-output").innerHTML = `<h4>${title}</h4>${extra}<pre>${JSON.stringify(data, null, 2)}</pre>`;
+}
+
+document.getElementById("btn-survival").onclick = () => {
+  const device = engine.deviceRows().find((item) => item.device_id === "GPU-042");
+  showLab("GPU-042 survival assessment", lifecycleAssessment(device));
+};
+
+document.getElementById("btn-wafer").onclick = () => {
+  const assessment = waferAssessment(904, "edge_ring");
+  const cells = assessment.cells
+    .map((cell) => `<i class="${cell.bad ? "fail" : "pass"}" style="grid-column:${cell.col + 1};grid-row:${cell.row + 1}" title="${cell.bad ? "defect" : "pass"}"></i>`)
+    .join("");
+  const view = { ...assessment };
+  delete view.cells;
+  showLab("Synthetic wafer spatial triage", view, `<div class="wafer-map">${cells}</div>`);
+};
+
+document.getElementById("btn-copilot").onclick = () => {
+  const device = engine.deviceRows().find((item) => item.device_id === "GPU-042");
+  showLab("Evidence-grounded engineering case", copilotAssessment(device));
+};
 
 // Real-time loop: tick + paint while the page is open
 setInterval(() => {

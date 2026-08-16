@@ -105,4 +105,25 @@ Document in every model card and README:
 
 ## Phase boundary
 
-Phase 0/1 defines this strategy only. Training pipelines, inference services, SHAP storage, and Ollama integration are implemented in Phases 8–13.
+The repository now includes dependency-free trained demonstrations for cooling classification and discrete-time survival, an interpretable wafer-pattern baseline, and a structured engineering-copilot reference. Full inference services, SHAP storage, production retrieval, and configurable LLM integration remain later-phase work.
+
+## Implemented semiconductor-AI extensions
+
+SiliconPulse uses different model families for different engineering decisions. “AI” is not a single undifferentiated component.
+
+| Decision | Current evidence | Production direction |
+| --- | --- | --- |
+| Detect cooling degradation | Trained logistic classifier on held-out synthetic seeds | Calibrated multivariate time-series models on device/time-aware splits |
+| Estimate lifecycle risk | Discrete-time survival benchmark with censoring and calibration bins | Product-specific survival, uncertainty, competing risks, and shadow-mode validation |
+| Triage wafer signatures | Interpretable spatial-feature baseline on generated maps | Vision + genealogy + process analytics with lot/time-aware validation |
+| Rank root cause | Deterministic device/peer evidence competition | Causal and graph evidence over monitor, test, maintenance, firmware, and workload history |
+| Explain and act | Structured copilot case with evidence IDs and approval gates | Governed retrieval, expert evaluation, least-privilege tools, and immutable audit |
+
+### Updated governing principles
+
+1. Evidence first; language last.
+2. Split by physical entity and forward time to prevent leakage.
+3. Calibrate risk before attaching operational meaning.
+4. Show contradicting and missing evidence, not only a leading hypothesis.
+5. Require human approval for high-impact actions.
+6. Label synthetic evidence and transfer boundaries prominently.

@@ -24,8 +24,10 @@ class ActiveScenario:
     def bump_progress(self, dt_seconds: float, speed: float) -> None:
         if self.stopped or self.scenario in {FailureScenario.NORMAL, FailureScenario.IDLE}:
             return
-        # Severity progresses over ~10 simulated minutes at severity 1.0
-        rate = 0.0015 * max(self.severity, 0.05) * speed
+        # Interactive scenarios reach full progression in roughly 11 simulated
+        # seconds at severity 1.0. The prior minute-scale rate made the public
+        # demo and deterministic scenario tests appear almost unchanged.
+        rate = 0.09 * max(self.severity, 0.05) * speed
         self.progress = min(1.0, self.progress + rate * dt_seconds)
 
 

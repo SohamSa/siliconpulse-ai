@@ -1,0 +1,82 @@
+{
+  "model_name": "synthetic-silicon-discrete-hazard-v1",
+  "model_type": "weighted_logistic_discrete_time_survival",
+  "features": [
+    "age_fraction",
+    "thermal_stress",
+    "twin_deviation",
+    "ecc_rate",
+    "fan_loss"
+  ],
+  "training_split": "device-separated synthetic fleet seed 17",
+  "test_split": "unseen devices synthetic fleet seed 91",
+  "train_intervals": 4668,
+  "test_intervals": 3124,
+  "normalization": {
+    "mean": [
+      0.4331992101635557,
+      0.46578234371244587,
+      0.142367692448136,
+      0.058877205925428604,
+      0.146399329967442
+    ],
+    "scale": [
+      0.282837020415059,
+      0.17192336754300513,
+      0.1444703166761891,
+      0.08510187347432036,
+      0.07994841202206315
+    ]
+  },
+  "intercept": -2.2351783581734606,
+  "coefficients": [
+    0.36058382966189834,
+    0.25303248994018845,
+    0.23184401988503753,
+    0.12439654062248476,
+    0.2227162906427755
+  ],
+  "evaluation": {
+    "interval_brier_score": 0.0432,
+    "concordance_index": 0.5924,
+    "comparable_device_pairs": 10943,
+    "calibration_bins": [
+      {
+        "range": "0.00-0.05",
+        "n": 882,
+        "mean_predicted": 0.0359,
+        "observed": 0.0079
+      },
+      {
+        "range": "0.05-0.10",
+        "n": 839,
+        "mean_predicted": 0.0719,
+        "observed": 0.0131
+      },
+      {
+        "range": "0.10-0.20",
+        "n": 778,
+        "mean_predicted": 0.1447,
+        "observed": 0.0296
+      },
+      {
+        "range": "0.20-0.40",
+        "n": 552,
+        "mean_predicted": 0.2727,
+        "observed": 0.0924
+      },
+      {
+        "range": "0.40-1.00",
+        "n": 73,
+        "mean_predicted": 0.4558,
+        "observed": 0.2055
+      }
+    ]
+  },
+  "rul_output": "survival curve plus median/10th/90th percentile interval when identifiable",
+  "limitations": [
+    "Synthetic right-censored telemetry only; no production silicon validation.",
+    "Intervals are simulator units, not calibrated wall-clock hours.",
+    "Calibration must be repeated by product, environment, workload, and monitor revision."
+  ]
+}
